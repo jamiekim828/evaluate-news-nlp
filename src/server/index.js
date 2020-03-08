@@ -3,12 +3,18 @@ const express = require('express');
 const mockAPIResponse = require('./mockAPI.js');
 var bodyParser = require('body-parser');
 var cors = require('cors');
+var AYLIENTextAPI = require('aylien_textapi');
+const dotenv = require('dotenv');
+dotenv.config();
 
-var json = {
-  title: 'test json response',
-  message: 'this is a message',
-  time: 'now'
-};
+// set aylien API credentials
+// NOTICE that textapi is the name I used, but it is arbitrary.
+// You could call it aylienapi, nlp, or anything else,
+//   just make sure to make that change universally!
+var textapi = new AYLIENTextAPI({
+  application_id: process.env.API_ID,
+  application_key: process.env.API_KEY
+});
 
 const app = express();
 app.use(cors());
