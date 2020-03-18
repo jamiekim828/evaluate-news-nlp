@@ -6,7 +6,7 @@ async function handleSubmit(event) {
   const input = document.getElementById('name').value;
 
   if (input) {
-    postData('/test', {
+    postData('http://localhost:8080/test', {
       text: input
     }).then(
       setTimeout(function() {
@@ -19,6 +19,9 @@ async function handleSubmit(event) {
 
 // POST DATA
 const postData = async (url = '', data = {}) => {
+  const input = document.getElementById('name').value;
+  console.log('input', input);
+
   const res = await fetch(url, {
     method: 'POST',
     credentials: 'same-origin',
@@ -29,7 +32,6 @@ const postData = async (url = '', data = {}) => {
   });
   try {
     console.log('post res', res);
-    console.log('res.body', res.body);
 
     const newData = await res.json();
     return newData;
@@ -41,7 +43,7 @@ const postData = async (url = '', data = {}) => {
 // // UPDATA UI
 const updateUI = async () => {
   console.log('updateUI');
-  const req = await fetch('/all', {
+  const req = await fetch('http://localhost:8080/all', {
     headers: { 'Content-type': 'application/json' },
     body: JSON.stringify()
   });

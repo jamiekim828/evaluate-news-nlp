@@ -53,14 +53,20 @@ app.listen(8080, function() {
 
 // Post Route
 
-const addData = async (req, res, next) => {
-  await textapi.sentiment({ text: req.body.text }, function(error, response) {
-    if (error === null) {
-      res.send(response);
-    } else {
-      console.log(error);
+const addData = async (req, res) => {
+  console.log('addData req', req, 'res', res);
+  await textapi.sentiment(
+    {
+      text: 'John is a very good football player!'
+    },
+    function(error, response) {
+      if (error === null) {
+        projectData.push(response);
+      } else {
+        console.log(error);
+      }
     }
-  });
+  );
 };
 
 app.post('/test', async function(req, res, next) {
