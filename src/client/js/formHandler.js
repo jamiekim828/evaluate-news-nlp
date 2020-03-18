@@ -50,8 +50,14 @@ const updateUI = async () => {
   try {
     const senti = await req.json();
     console.log('senti', senti);
+    const myResult = senti[0];
 
-    document.getElementById('results').innerHTML = '<h1>Sentiment</h1>';
+    document.getElementById(
+      'polarity'
+    ).innerHTML = `<h2>The polarity of this article is ${myResult.polarity} with ${myResult.polarity_confidence}%.</h2>`;
+    document.getElementById(
+      'subjectivity'
+    ).innerHTML = `<h2>Ans the subjectivity of this article is ${myResult.subjectivity} with ${myResult.subjectivity_confidence}%.</h2>`;
   } catch (error) {
     console.log('error', error);
   }
