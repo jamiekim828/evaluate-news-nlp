@@ -7,6 +7,8 @@ var AYLIENTextAPI = require('aylien_textapi');
 const dotenv = require('dotenv');
 dotenv.config();
 
+const projectData = [];
+
 // set aylien API credentials
 // NOTICE that textapi is the name I used, but it is arbitrary.
 // You could call it aylienapi, nlp, or anything else,
@@ -45,6 +47,31 @@ app.listen(8080, function() {
   console.log('Example app listening on port 8080!');
 });
 
-app.get('/test', function(req, res) {
-  res.send(mockAPIResponse);
+// app.get('/test', function(req, res) {
+//   res.send(mockAPIResponse);
+// });
+
+// Post Route
+
+const addData = async (req, res, next) => {
+  await textapi.sentiment({ text: req.body.text }, function(error, response) {
+    if (error === null) {
+      res.send(response);
+    } else {
+      console.log(error);
+    }
+  });
+};
+
+app.post('/test', async function(req, res, next) {
+  await addData();
+  res.send('post success');
 });
+
+// GET '/all'
+app.get('/all', getProjectData);
+
+function getProjectData(req, res) {
+  res.send(projectData);
+  console.log('projectData', projectData);
+}

@@ -22,15 +22,21 @@
         </header>
 
         <main>
-            <section>
-                <form class="" onsubmit="return handleSubmit(event)">
-                    <input id="name" type="text" name="input" value="" onblur="onBlur()" placeholder="Name">
-                    <input type="submit" name="" value="submit" onclick="return handleSubmit(event)" onsubmit="return handleSubmit(event)">
+            <section id="formsection">
+                <div id="formdiv">
+                    <div id="instruction">
+                        <h2>Instruction</h2>
+                        <p>Put an article in the text form and check the sentiment.</p>
+                    </div>
+                <form id="textform" onsubmit="return Client.handleSubmit(event)">
+                    <input id="name" type="text" name="input" placeholder="Article">
+                    <input id="submitButton" type="button" name="" value="Check" onclick="return Client.handleSubmit(event)"  >
                 </form>
+                </div>
             <section>
 
-            <section>
-                <strong>Form Results:</strong>
+            <section id="resultsection">
+                <strong>Results:</strong>
                 <div id="results"></div>
             </section>
         </main>
