@@ -51,13 +51,20 @@ const updateUI = async () => {
     const senti = await req.json();
     console.log('senti', senti);
     const myResult = senti[0];
+    function roundToTwo(num) {
+      return +(Math.round(num + 'e+2') + 'e-2');
+    }
+    const polarity_perc = roundToTwo(myResult.polarity_confidence * 100);
+    const subjectivity_perc = roundToTwo(
+      myResult.subjectivity_confidence * 100
+    );
 
     document.getElementById(
       'polarity'
-    ).innerHTML = `<h2>The polarity of this article is ${myResult.polarity} with ${myResult.polarity_confidence}%.</h2>`;
+    ).innerHTML = `<h2>The polarity of this article is ${myResult.polarity} with ${polarity_perc}%.</h2>`;
     document.getElementById(
       'subjectivity'
-    ).innerHTML = `<h2>Ans the subjectivity of this article is ${myResult.subjectivity} with ${myResult.subjectivity_confidence}%.</h2>`;
+    ).innerHTML = `<h2>And the subjectivity of this article is ${myResult.subjectivity} with ${subjectivity_perc}%.</h2>`;
   } catch (error) {
     console.log('error', error);
   }
