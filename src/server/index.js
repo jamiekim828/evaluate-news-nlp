@@ -1,4 +1,5 @@
 var path = require('path');
+const webpack = require('webpack');
 const express = require('express');
 const mockAPIResponse = require('./mockAPI.js');
 var bodyParser = require('body-parser');
