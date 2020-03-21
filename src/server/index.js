@@ -51,13 +51,45 @@ app.listen(8080, function() {
 //   res.send(mockAPIResponse);
 // });
 
+// GET '/all'
+app.get('/all', getProjectData);
+
+function getProjectData(req, res) {
+  res.send(projectData);
+  console.log('projectData', projectData);
+}
+
 // Post Route
 
-const addData = async (req, res) => {
-  console.log('addData req', req, 'res', res);
-  await textapi.sentiment(
+// app.post('/test', async function(req, res) {
+//   await addData();
+//   res.send('post success');
+// });
+
+// const addData = async (req, res) => {
+//   console.log('addData req', req, 'res', res);
+
+//   await textapi.sentiment(
+//     {
+//       text: 'John is a great football player!'
+//     },
+//     function(error, response) {
+//       if (error === null) {
+//         projectData.push(response);
+//       } else {
+//         console.log(error);
+//       }
+//     }
+//   );
+// };
+
+app.post('/test', addData);
+
+function addData(req, res) {
+  console.log('req.body', req.body);
+  textapi.sentiment(
     {
-      text: 'John is a very good football player!'
+      text: req.body.text
     },
     function(error, response) {
       if (error === null) {
@@ -67,17 +99,4 @@ const addData = async (req, res) => {
       }
     }
   );
-};
-
-app.post('/test', async function(req, res, next) {
-  await addData();
-  res.send('post success');
-});
-
-// GET '/all'
-app.get('/all', getProjectData);
-
-function getProjectData(req, res) {
-  res.send(projectData);
-  console.log('projectData', projectData);
 }

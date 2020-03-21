@@ -14,7 +14,6 @@ async function handleSubmit(event) {
       }, 1000)
     );
   }
-  console.log('::: Form Submitted :::');
 }
 
 // POST DATA
@@ -50,7 +49,7 @@ const updateUI = async () => {
   try {
     const senti = await req.json();
     console.log('senti', senti);
-    const myResult = senti[0];
+    const myResult = senti[senti.length - 1];
     function roundToTwo(num) {
       return +(Math.round(num + 'e+2') + 'e-2');
     }
@@ -61,10 +60,10 @@ const updateUI = async () => {
 
     document.getElementById(
       'polarity'
-    ).innerHTML = `<h2>The polarity of this article is ${myResult.polarity} with ${polarity_perc}%.</h2>`;
+    ).innerHTML = `<h2>* The polarity of this article is ${myResult.polarity} with ${polarity_perc}%.</h2>`;
     document.getElementById(
       'subjectivity'
-    ).innerHTML = `<h2>And the subjectivity of this article is ${myResult.subjectivity} with ${subjectivity_perc}%.</h2>`;
+    ).innerHTML = `<h2>* And the subjectivity of this article is ${myResult.subjectivity} with ${subjectivity_perc}%.</h2>`;
   } catch (error) {
     console.log('error', error);
   }
