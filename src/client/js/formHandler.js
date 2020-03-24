@@ -5,7 +5,7 @@ async function handleSubmit(event) {
 
   const input = document.getElementById('name').value;
 
-  if (input) {
+  if (Client.textLength(input)) {
     postData('http://localhost:8080/test', {
       text: input
     }).then(
